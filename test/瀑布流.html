@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<style>
+    .demo-1 {
+        -moz-column-count: 3;
+        /* Firefox */
+        -webkit-column-count: 3;
+        /* Safari 和 Chrome */
+        column-count: 3;
+        -moz-column-gap: 1em;
+        -webkit-column-gap: 1em;
+        column-gap: 1em;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .item {
+        padding: 2em;
+        margin-bottom: 2em;
+        -webkit-column-break-inside: avoid;
+        break-inside: avoid;
+        /*防止斷點*/
+        background: #ccc;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="demo-1">
+        <div class="item">
+            <div class="item_content content-lar" style="height:100px;"> 1</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:150px;"> 2</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:50px;"> 3</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:200px;"> 4</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:60px;"> 5 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar" style="height:90px;"> 6</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma"> 7</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar" style="height:120px;"> 8</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-lar"> 9</div>
+        </div>
+        <div class="item">
+            <div class="item_content content-sma" style="height:100px;"> 10 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid"> 11 </div>
+        </div>
+        <div class="item">
+            <div class="item_content content-mid" style="height:100px;"> 12</div>
+        </div>
+        <!-- more items -->
+    </div>
+
+    <script type="text/javascript">
+            // 定義瀑布流演算法函式
+             function fall() {
+                 const minGap = 20; // 最小間距，讓每一列的最小空隙可以自定義，避免太過擁擠的情況發生。但是，會通過計算得到真實的間距。
+                 const itemWidth = 300; // 每一項的寬度，即當前每一個圖片容器的寬度。保證每一列都是等寬不等高的。
+                 const scrollBarWidth = getScrollbarWidth();    // 獲取滾動條的寬度
+                 const pageWidth = window.innerWidth - scrollBarWidth; // 獲取當前頁面的寬度 = window.innerWidth - 滾動條的寬度
+                 const column = Math.floor(pageWidth / (itemWidth + minGap)); // 實際列數=頁面寬度/(圖片寬度+最小間距)
+                 const gap = (pageWidth - itemWidth * column) / column/2; // 計算真實間距 = (頁面寬度- 圖片寬度*實際列數)/實際列數/2
+                const items = document.querySelectorAll('img'); // 獲取所有的外層元素
+                
+                // 獲取滾動條的寬度
+                function getScrollbarWidth() {
+                    const oDiv = document.createElement('div');//建立一個div
+                    // 給div設定樣式。隨便定義寬高，只要能獲取到滾動條就可以
+                    oDiv.style.cssText = `width: 50px;height: 50px;overflowY: scroll;` 
+                    document.body.appendChild(oDiv);//把div新增到body中
+                    const scrollbarWidth = oDiv.offsetWidth - oDiv.clientWidth;// 使最大寬度和可視寬度相減，獲得到滾動條寬度。
+                    oDiv.remove();//移除建立的div
+                    return scrollbarWidth;//返回滾動條寬度
+                }
+                const heightArr = []; // 定義一個空陣列，儲存最低高度。
+                for (let i = 0; i < items.length; i++) {
+                    // 遍歷所有的外層容器
+                    const height = items[i].offsetHeight;
+                    // 如果當前處在第一行
+                    if (i < column) {
+                        // 直接設定元素距離上部的位置和距離左邊的距離。
+                        items[i].style.cssText = `top: ${gap}px;left: ${(itemWidth + gap) * i + gap}px`;
+                        // 儲存當前元素的高度。
+                        heightArr.push(height);
+                    } else {
+                    // 不是第一行的話，就進行比對。
+                        let minHeight = heightArr[0]; // 先儲存第一項的高度
+                        let minIndex = 0; // 儲存第一項的索引值
+                        for (let j = 0; j < heightArr.length; j++) {
+                            // 通過迴圈遍歷比對，拿到最小值和最小值的索引。
+                            if (minHeight > heightArr[j]) {
+                                minHeight = heightArr[j];
+                                minIndex = j;
+                            }
+                        }
+                        // 通過最小值為當前元素設定top值，通過索引為當前元素設定left值。
+                        items[i].style.cssText = `top: ${minHeight + gap *2}px; left: ${(itemWidth + gap) * minIndex + gap}px`;
+                        // 並修改當前索引的高度為當前元素的高度
+                        heightArr[minIndex] = minHeight + gap + height;
+                    }
+                }
+            }
+            // 頁面載入完成呼叫一次。
+            window.onload = fall;
+            // 頁面尺寸發生改變再次呼叫。
+            window.onresize = fall;
+        </script>
+       
+    <!-- <div class='row box'>
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, id ipsum odit atque assumenda ratione recusandae corrupti numquam aliquam enim eaque velit natus! Distinctio provident repellendus dicta praesentium at. Odit.
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div>
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque perferendis, rerum quo aperiam sunt reiciendis eligendi incidunt. Facere id est voluptas, at maiores quo nobis esse saepe, alias, blanditiis sequi!
+            Id, voluptates, adipisci excepturi modi fugit, soluta sapiente amet velit. Unde similique accusantium non quia, modi ea dignissimos reiciendis vitae voluptas consectetur!
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div>
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas sapiente velit, accusamus a quas magnam qui quasi, optio nobis quisquam quae provident! Rerum quibusdam id nemo deserunt commodi vero!
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div>
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, eius perferendis consequuntur inventore sequi exercitationem voluptatibus doloremque non vitae incidunt recusandae id natus tempore labore! Vitae quo corrupti nihil alias?
+            Impedit, unde rem. Repellat obcaecati consequatur quidem sed debitis odit. Placeat consequatur reiciendis laboriosam aliquid vitae harum soluta incidunt, nesciunt blanditiis, architecto, commodi consectetur eligendi. Obcaecati expedita commodi quo enim.
+            Iste voluptate incidunt debitis itaque vitae, ipsam temporibus voluptatibus, et saepe mollitia aperiam quam excepturi veritatis ut cumque, hic quisquam. Corrupti ratione consectetur iure. Accusantium iure inventore minus deserunt necessitatibus?
+            Unde magnam officia cumque eius accusantium, sit illum, ratione dolorum at iure adipisci veritatis harum quis ab earum aperiam voluptates illo voluptatem est! Quisquam, perspiciatis. Explicabo accusamus incidunt et ad.
+            Vel minus earum laudantium suscipit cum ducimus optio assumenda sed repudiandae magni! Illo illum deserunt laborum dolorum, fugit quibusdam nulla doloremque error? Suscipit ea iusto fugit sequi quam velit est?
+            Mollitia aut enim veritatis hic laboriosam. Quasi officia esse error ducimus nihil saepe exercitationem nam incidunt! Tenetur explicabo, natus a, eius suscipit esse facilis omnis porro velit voluptatibus necessitatibus numquam?
+            Deserunt adipisci cupiditate nesciunt omnis quis, consequatur sunt culpa eaque est perferendis, sint fugiat consequuntur inventore tenetur vel magni vitae expedita, deleniti optio! Quas ullam sit labore magni placeat error.
+            A iste, tempore reprehenderit optio blanditiis culpa saepe sed neque atque officiis modi ducimus voluptatibus pariatur aut voluptate? Tenetur vero expedita reiciendis, velit corrupti dolore molestias minus! Sequi, beatae assumenda.
+            Dolorum fugiat fugit obcaecati tempora deserunt, sint accusamus error voluptates nisi impedit non ad, veniam hic iste assumenda in necessitatibus minus. Pariatur nihil dicta nemo, incidunt nulla totam in architecto.
+            Nemo molestias provident aliquid sapiente nihil! Temporibus, natus quaerat ea minus odit quo, odio soluta laudantium consectetur quidem nemo facere obcaecati fugit et enim illum iure corrupti! Eaque, maxime aliquid.
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div> 
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum optio aspernatur, omnis, nihil officiis earum sapiente, aliquid esse beatae similique maiores reiciendis voluptatum unde itaque ullam doloremque totam dolorum possimus.
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div> <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus non architecto earum iste quo nihil! Error consectetur voluptates, ipsam neque, assumenda repellat tempore dolore nisi, quasi perferendis magni provident cumque?
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div>
+        <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum optio aspernatur, omnis, nihil officiis earum sapiente, aliquid esse beatae similique maiores reiciendis voluptatum unde itaque ullam doloremque totam dolorum possimus.
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div> <div class='item col-xs-12 col-sm-6 col-md-4'>
+            <div class='panel panel-default'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus non architecto earum iste quo nihil! Error consectetur voluptates, ipsam neque, assumenda repellat tempore dolore nisi, quasi perferendis magni provident cumque?
+                <img src="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/51370/s300_Dog-Microchipping-April_2016.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $('.box').masonry({
+            itemSelector: 'item',
+        });
+    </script> -->
+    <!-- jQuery 3.x -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <!-- Bootstrap popper-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
+
+    <!-- Masonry JS -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+</body>
+
+</html>

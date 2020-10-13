@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bt排版</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        /*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+        body {
+           margin: 0;
+        }
+
+       
+        
+ul{
+    padding-inline-start: 0;
+}
+.CardList-item {
+            width: 100%;
+            /* max-width: 100%; */
+            height: 300px;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            -webkit-perspective: 3000px;
+            perspective: 3000px;
+            
+        }
+        .CardList-itemInnerWrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border: 1px solid #1ca9b0;
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            -webkit-transition: -webkit-transform 700ms;
+            transition: -webkit-transform 700ms;
+            transition: transform 700ms;
+            transition: transform 700ms, -webkit-transform 700ms;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .CardList-item.is-active .CardList-itemInnerWrapper {
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+        .no-csstransforms3d .CardList-item.is-active .CardList-itemInnerWrapper,
+        .is-IE .CardList-item.is-active .CardList-itemInnerWrapper {
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+
+        .CardList-item.is-active.no-action .CardList-itemInnerWrapper {
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+
+        .CardList-title,
+        .CardList-description {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .CardList-title {
+            margin-top: 0;
+            background: #f0f0f0;
+            color: #595959;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            -webkit-transition: color 300ms ease-out;
+            transition: color 300ms ease-out;
+            z-index: 2;
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+
+        .CardList-item:hover .CardList-title {
+            color: #1ca9b0;
+        }
+
+        .CardList-titleInnerWrapper {
+            position: absolute;
+            top: 50%;
+            margin-top: auto;
+            margin-bottom: auto;
+            left: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 80%;
+        }
+
+        .CardList-description {
+            background: #1ca9b0;
+            color: #fff;
+            z-index: 1;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+           
+        }
+
+        .no-csstransforms3d .CardList-description,
+        .is-IE .CardList-description {
+            display: none;
+            -webkit-transform: none;
+            transform: none;
+            z-index: 3;
+        }
+
+        .CardList-descriptionInnerWrapper {
+            position: absolute;
+            top: 50%;
+            margin-top: auto;
+            margin-bottom: auto;
+            left: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 80%;
+        }
+
+        .CardList-icon {
+            width: 3rem;
+            height: 3rem;
+            fill: none;
+            stroke: #1ca9b0;
+            stroke-linecap: square;
+            stroke-miterlimit: 10;
+            stroke-width: 2px;
+            display: block;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+
+        <div class="col-lg-3 CardList-item">
+            <div class=" CardList-itemInnerWrapper">
+                <h2 class="CardList-title">
+                    <span class="CardList-titleInnerWrapper">
+                        <svg class="CardList-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 46">
+                            <path class="CardList-iconPath" d="M7 1h28a2 2 0 0 1 2 2v40a2 2 0 0 1-2 2H7M1 1h6v44H1z">
+                            </path>
+                            <path class="CardList-iconPath" d="M15 9h14v8H15zM15 23h14M15 29h6M41 7v4M41 17v4"></path>
+                        </svg>Create a Business Plan </span>
+                </h2>
+                <div class="CardList-description">
+                    <span class="CardList-descriptionInnerWrapper">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis turpis, viverra a tellus
+                        quis, tincidunt faucibus velit. Phasellus varius ipsum et dolor molestie vehicula. Sed eleifend
+                        leo odio, ac venenatis sem euismod vel. Suspendisse sed pharetra dolor. Maecenas a turpis elit.
+                        Aliquam convallis non lectus eu laoreet. </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 CardList-item">
+            <div class="CardList-itemInnerWrapper">
+                <h2 class="CardList-title">
+                    <span class="CardList-titleInnerWrapper">
+                        <svg class="CardList-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+                            <path class="CardList-iconPath" d="M27 11h18v34H1V11h18"></path>
+                            <path class="CardList-iconPath"
+                                d="M27 14.99h-8v-10a4 4 0 0 1 4-4 4 4 0 0 1 4 4v10zM14 28.99a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3 3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zM28 27h10M28 33h7M21 36.99H7v-1.5a3.54 3.54 0 0 1 3.5-3.5h7a3.54 3.54 0 0 1 3.5 3.5v1.5z">
+                            </path>
+                        </svg>Maximize Marketing </span>
+                </h2>
+                <div class="CardList-description">
+                    <span class="CardList-descriptionInnerWrapper">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis turpis, viverra a tellus
+                        quis, tincidunt faucibus velit. Phasellus varius ipsum et dolor molestie vehicula. Sed eleifend
+                        leo odio, ac venenatis sem euismod vel. Suspendisse sed pharetra dolor. Maecenas a turpis elit.
+                        Aliquam convallis non lectus eu laoreet. </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 CardList-item">
+            <div class="CardList-itemInnerWrapper">
+                <h2 class="CardList-title">
+                    <span class="CardList-titleInnerWrapper">
+                        <svg class="CardList-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+                            <path class="CardList-iconPath" d="M27 11h18v34H1V11h18"></path>
+                            <path class="CardList-iconPath"
+                                d="M27 14.99h-8v-10a4 4 0 0 1 4-4 4 4 0 0 1 4 4v10zM14 28.99a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3 3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zM28 27h10M28 33h7M21 36.99H7v-1.5a3.54 3.54 0 0 1 3.5-3.5h7a3.54 3.54 0 0 1 3.5 3.5v1.5z">
+                            </path>
+                        </svg>Maximize Marketing </span>
+                </h2>
+                <div class="CardList-description">
+                    <span class="CardList-descriptionInnerWrapper">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis turpis, viverra a tellus
+                        quis, tincidunt faucibus velit. Phasellus varius ipsum et dolor molestie vehicula. Sed eleifend
+                        leo odio, ac venenatis sem euismod vel. Suspendisse sed pharetra dolor. Maecenas a turpis elit.
+                        Aliquam convallis non lectus eu laoreet. </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 CardList-item">
+            <div class="CardList-itemInnerWrapper">
+                <h2 class="CardList-title">
+                    <span class="CardList-titleInnerWrapper">
+                        <svg class="CardList-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46">
+                            <path class="CardList-iconPath" d="M27 11h18v34H1V11h18"></path>
+                            <path class="CardList-iconPath"
+                                d="M27 14.99h-8v-10a4 4 0 0 1 4-4 4 4 0 0 1 4 4v10zM14 28.99a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3 3 3 0 0 1 3 3v2a3 3 0 0 1-3 3zM28 27h10M28 33h7M21 36.99H7v-1.5a3.54 3.54 0 0 1 3.5-3.5h7a3.54 3.54 0 0 1 3.5 3.5v1.5z">
+                            </path>
+                        </svg>Maximize Marketing </span>
+                </h2>
+                <div class="CardList-description">
+                    <span class="CardList-descriptionInnerWrapper">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis turpis, viverra a tellus
+                        quis, tincidunt faucibus velit. Phasellus varius ipsum et dolor molestie vehicula. Sed eleifend
+                        leo odio, ac venenatis sem euismod vel. Suspendisse sed pharetra dolor. Maecenas a turpis elit.
+                        Aliquam convallis non lectus eu laoreet. </span>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script>
+    
+            var $cards = $('.CardList-item');
+
+            $cards.mouseover( function (e) {
+                $cards.removeClass('is-active');
+                $(e.target).parents('.CardList-item').addClass('is-active');
+            });
+        
+
+    </script>
+</body>
+
+</html>

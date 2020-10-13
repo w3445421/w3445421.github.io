@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* 頁首 */
+        #home {
+            width: 100%;
+            height: 100vh;
+            background-color: #1fa19b;
+        }
+
+        #header {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* navbar狀態 */
+        .nav-link {
+            text-align: end;
+        }
+
+        /* Icon Forward 動態效果*/
+        .hvr-icon-forward {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-transition-duration: 0.1s;
+            transition-duration: 0.1s;
+        }
+
+        .hvr-icon-forward .hvr-icon {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-transition-duration: 0.1s;
+            transition-duration: 0.1s;
+            -webkit-transition-property: transform;
+            transition-property: transform;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+            color: white;
+            padding: 0 5px;
+            font-size: 14px;
+        }
+
+        .hvr-icon-forward:hover .hvr-icon,
+        .hvr-icon-forward:focus .hvr-icon,
+        .hvr-icon-forward:active .hvr-icon {
+            -webkit-transform: translateX(4px);
+            transform: translateX(4px);
+        }
+
+        /* banner效果 */
+        body {
+            width: 100%;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+        }
+
+        #item_1 {
+            position: absolute;
+            top: 10%;
+            left: 20%;
+        }
+
+        #item_2 {
+            position: absolute;
+            top: 400px;
+            left: 200px;
+        }
+
+        #item_3 {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+        }
+
+        #item_4 {
+            position: absolute;
+            bottom: 15%;
+            right: 20%;
+        }
+
+        .banner_img {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+
+        }
+
+        #person_1 {
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 240px);
+        }
+
+        #person_2 {
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 180px);
+            display: none;
+        }
+
+        /* 以下分頁 */
+        section {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(212, 212, 212);
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+        }
+
+        /* Center the loader */
+        #loader {
+            position: absolute;
+            left: calc(50% - 60px);
+            top: calc(50% - 60px);
+            z-index: 1;
+            /* margin: -75px 0 0 -75px; */
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #cbec38;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            text-align: center;
+            line-height: 80px;
+
+        }
+
+        #loader_bg {
+            width: 100%;
+            height: 100%;
+            background-color: #1fa19b;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        */
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+
+
+        #myDiv {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body onload="myFunction()" style="margin:0;">
+    <div id="loader_bg">
+        <div id="loader">Zero</div>
+
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+            <!-- <h2>Tada!</h2>
+      <p>Some text in my newly loaded page..</p> -->
+
+            <div id="home">
+                <!-- navbar -->
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+                    <a class="navbar-brand" href="#">Zero Market</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="header" class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link hvr-icon-forward " href="#"><i
+                                        class="fas fa-chevron-circle-right hvr-icon"></i>輕鬆找店家</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link hvr-icon-forward" href="#"><i
+                                        class="fas fa-chevron-circle-right hvr-icon"></i>體驗課程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link hvr-icon-forward" href="#"><i
+                                        class="fas fa-chevron-circle-right hvr-icon"></i>種子計畫</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle  hvr-icon-forward" href="#"
+                                    id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-chevron-circle-right hvr-icon"></i>
+                                    友站連結
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.instagram.com/?hl=zh-tw"><i
+                                        class="fab fa-instagram"></i></a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.facebook.com/"><i
+                                        class="fab fa-facebook-f"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- banner -->
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="container pt-5">
+                        <div id="big_log" class="text-center h1 mt-5">Zero Market</div>
+                        <div id="item_1" class="banner_img"></div>
+                        <div id="item_2" class="banner_img"></div>
+                        <div id="item_3" class="banner_img"></div>
+                        <div id="item_4" class="banner_img"></div>
+                        <!-- <div id="item_5" class="banner_img"></div>
+                <div id="item_6" class="banner_img"></div> -->
+
+                        <img id="person_1"
+                            src="https://www.kahunsho-byebye.com/wp-content/themes/kahunsho-byebye/img/main.png">
+                        <img id="person_2"
+                            src="https://www.kahunsho-byebye.com/wp-content/themes/kahunsho-byebye/img/keyword_1.jpg">
+                    </div>
+                </div>
+
+            </div>
+            <!-- 概念 -->
+            <section>
+                <div class="container">
+
+                    <div class="text-center h1 pt-5">ABOUT</div>
+                    <div class="text-center h3 p-2">關於裸買</div>
+                    <div class="row" style="margin-top: 5% ;">
+                        <div id="about" class="col">
+                            <img src="https://www.kahunsho-byebye.com/wp-content/themes/kahunsho-byebye/img/img_2.png"
+                                alt="">
+                            <!-- 這邊只是一張圖 不搞互動 發現跟前面圖一模一樣 -->
+                        </div>
+                        <div class="col">
+                            <div class="content p-5">
+                                <h2 class="pt-2">裸買（shop naked）</h2>
+                                <h4 class="text-justify p-2">
+                                    即購物時避免使用不必要的包裝，減少浪費。「裸買運動」是一系列可持續發展關注組織思網絡發起的環保行動。鼓勵社區環保意識之餘，亦為可能落實的都市固體廢物收費計劃作好準備
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- 無包裝是什麼 -->
+            <section>
+                <div class="container">
+
+                    <div class="text-center h1 pt-5">TOPICS</div>
+                    <div class="text-center h3 p-2">2020年、最新研究に基づいた
+                        花粉にまつわる注目の情報をピックアップ！</div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <img src="https://www.kahunsho-byebye.com/wp-content/themes/kahunsho-byebye/img/img_2.png"
+                                        class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up the
+                                            bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                2 of 3 (wider)
+                            </div>
+                            <div class="col">
+                                3 of 3
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                1 of 3
+                            </div>
+                            <div class="col-5">
+                                2 of 3 (wider)
+                            </div>
+                            <div class="col">
+                                3 of 3
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section></section>
+            </section>
+        </div>
+    </div>
+    <script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 3000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script>
+        // banner JQ效果
+        $('.banner_img').mouseleave(function () {
+
+            $('#person_1').fadeToggle('slow');
+            $('#person_2').fadeToggle();
+        })
+        $('#item_1').mouseenter(function () {
+            $('#item_1').animate({ opacity: '0' }, 500);
+            $('#item_1')[0].style.display = 'none';
+            $('#person_1').fadeToggle();
+            $('#person_2').fadeToggle();
+        })
+        $('#item_2').mouseenter(function () {
+            $('#item_2').animate({ opacity: '0' }, 500);
+            $('#item_2')[0].style.display = 'none';
+            $('#person_1').fadeToggle();
+            $('#person_2').fadeToggle();
+        })
+        $('#item_3').mouseenter(function () {
+            $('#item_3').animate({ opacity: '0' }, 500);
+            $('#item_3')[0].style.display = 'none';
+            $('#person_1').fadeToggle();
+            $('#person_2').fadeToggle('');
+        })
+        $('#item_4').mouseenter(function () {
+            $('#item_4').animate({ opacity: '0' }, 500);
+            $('#item_4')[0].style.display = 'none';
+            $('#person_1').fadeToggle();
+            $('#person_2').fadeToggle();
+        })
+    </script>
+</body>
+
+</html>

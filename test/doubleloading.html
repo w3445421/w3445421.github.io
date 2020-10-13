@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #loading {
+            background: white;
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+            z-index: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #begin {
+            width: 10px;
+            height: 10px;
+            background-image: url("https://photo.orsoon.com/180610/EPS-180610_28/FMh8Zh3d7z_small.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="loading">
+        <div id="begin"></div>
+        <!-- begin是loading中的畫面呈現 -->
+    </div>
+    <!-- 內文開始 -->
+    <img src="https://i1.hdslb.com/bfs/archive/399b28d83d94f2c831c6f65535612decac52500d.jpg">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script>
+        //   loading的效果
+        $(document).ready(function () {
+
+            var wValue = $(this).width();
+            var hValue = $(this).height();
+
+            $('#begin').animate({
+                width: 0.5 * wValue,
+                height: 0.5 * hValue
+            }, 2000);
+            // *0.5感覺畫面有些微變化
+            $('#begin').animate({
+                width: 200 * wValue,
+                height: 200 * hValue
+            }, 2000);
+            // 二次放大
+            $('#loading').delay(2000).fadeOut(1000);
+            // 把loading整個頁面關閉
+        });
+    </script>
+</body>
+
+</html>

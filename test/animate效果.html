@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://cdn.bootcdn.net/ajax/libs/hover.css/1.0.9/css/hover-min.css" rel="stylesheet">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <style>
+    body {
+      background-color: tomato;
+    }
+
+    :root {
+      --animate-duration: 3s;
+
+    }
+
+    /* Icon 綠色效果Fade */
+    /* .hvr-icon-fade {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    }
+
+    .hvr-icon-fade .hvr-icon {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-transition-duration: 0.5s;
+      transition-duration: 0.5s;
+      -webkit-transition-property: color;
+      transition-property: color;
+    }
+
+    .hvr-icon-fade:hover .hvr-icon,
+    .hvr-icon-fade:focus .hvr-icon,
+    .hvr-icon-fade:active .hvr-icon {
+      color: #0F9E5E;
+    } */
+
+    @-webkit-keyframes hvr-icon-wobble-horizontal {
+      16.65% {
+        -webkit-transform: translateX(6px);
+        transform: translateX(6px);
+      }
+
+      33.3% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+      }
+
+      49.95% {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+      66.6% {
+        -webkit-transform: translateX(-2px);
+        transform: translateX(-2px);
+      }
+
+      83.25% {
+        -webkit-transform: translateX(1px);
+        transform: translateX(1px);
+      }
+
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes hvr-icon-wobble-horizontal {
+      16.65% {
+        -webkit-transform: translateX(6px);
+        transform: translateX(6px);
+      }
+
+      33.3% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+      }
+
+      49.95% {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+      66.6% {
+        -webkit-transform: translateX(-2px);
+        transform: translateX(-2px);
+      }
+
+      83.25% {
+        -webkit-transform: translateX(1px);
+        transform: translateX(1px);
+      }
+
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+
+    .hvr-icon-wobble-horizontal {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
+
+    .hvr-icon-wobble-horizontal .hvr-icon {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    .hvr-icon-wobble-horizontal:hover .hvr-icon,
+    .hvr-icon-wobble-horizontal:focus .hvr-icon,
+    .hvr-icon-wobble-horizontal:active .hvr-icon {
+      -webkit-animation-name: hvr-icon-wobble-horizontal;
+      animation-name: hvr-icon-wobble-horizontal;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+      color: yellow;
+    }
+
+    /* Icon Forward 動態效果*/
+    .hvr-icon-forward {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-transition-duration: 0.1s;
+      transition-duration: 0.1s;
+    }
+
+    .hvr-icon-forward .hvr-icon {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-transition-duration: 0.1s;
+      transition-duration: 0.1s;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+      /* color: white; */
+      padding: 0 5px;
+      font-size: 14px;
+    }
+
+    .hvr-icon-forward:hover .hvr-icon,
+    .hvr-icon-forward:focus .hvr-icon,
+    .hvr-icon-forward:active .hvr-icon {
+      -webkit-transform: translateX(4px);
+      transform: translateX(4px);
+      color: yellow;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="hvr-icon-fade">
+    <i class="fa fa-check hvr-icon"></i>123123<br />
+
+
+  </div>
+  <div class="hvr-icon-wobble-horizontal">
+    <i class="fas fa-chevron-circle-right hvr-icon"></i> 選我
+  </div>
+
+
+
+  <div class=" hvr-icon-forward">
+    </li>
+    <a href="#">
+      <i class="fas fa-chevron-circle-right hvr-icon"></i>輕鬆找店家</a>
+  </div>
+
+
+
+
+  <h1 class="animate__animated animate__fadeInUp">An animated element</h1>
+
+</body>
+
+</html>

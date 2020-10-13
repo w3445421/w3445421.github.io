@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.css">
+    <style>
+        .section {
+            text-align: center;
+            font-size: 3em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section">Section 1</div>
+        <div class="section">
+            <div class="slide" data-anchor="slide1">Slide 2.1</div>
+            <div class="slide" data-anchor="slide2">Slide 2.2</div>
+        </div>
+        <div class="section">Section 3</div>
+        <div class="section">Section 4</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.extensions.min.js"
+        integrity="sha512-pci5WG2+7QnpsinWWpGUd3RgI61fU1bWlQQQegC2mVqwOQC/+Xp0ROGO0AYB6dvoLBYRxwm+t+DWOVRkxmlcdQ=="
+        crossorigin="anonymous"></script>
+    <script>
+        new fullpage('#fullpage', {
+            sectionsColor: ['yellow', 'orange', '#C0C0C0', '#ADD8E6'],
+        });
+    </script>
+</body>
+
+</html>
